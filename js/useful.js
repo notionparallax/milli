@@ -38,25 +38,10 @@ var processInputs = function() {
         ga('send', 'event', 'success', 'click', 'all filled in!');
         return true;
     } else {
-        // if somethign is wrong then go through these options
-        if (tidyMessage.length === 0) {
-            console.log("You haven't written anything!");
-            messageWritten = false;
-        }
-        if (tidyAddress.length === 0) {
-            console.log("Where should we send it?");
-            addressWritten = false;
-        }
-        if (t_c_checked === false) {
-            console.log("If you don't tick to say that you agree then we can't write your letter!");
-            tancTicked = false;
-        }
-        //then send an error report to GA
-        ga('send', 'event', 'error', 'click',
-            "messageWritten:"+messageWritten+"addressWritten:"+addressWritten+"tancTicked:"+tancTicked );
+        //send an error report to GA
+        ga('send', 'event', 'error', 'click',"not properly filled in");
         return false;
     }
-    return false;
 };
 
 var submit_email = function() {
@@ -103,7 +88,7 @@ $(document).ready(function() {
     document.postedNotesOneOffEventFlags.haswrittenSome_message = false;
     document.postedNotesOneOffEventFlags.haswrittenSome_address = false;
 
-    console.log($("#realButton").click(processInputs));
+    $("#realButton").click(processInputs);
 
     $(window).bind("beforeunload", function() {
         //this sends a ga event when the window is closed.
