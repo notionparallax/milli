@@ -1,21 +1,15 @@
-var fixBorder = function() {
-    var pushBy = ($("body").width() - $(".where-row").width()) / 2;
-    $(".where-row").css("margin-left", -pushBy);
-    $(".where-row").css("margin-right", -pushBy);
-    $(".where-row").css("padding-left", pushBy);
-    $(".where-row").css("padding-right", pushBy);
-    // console.log([pushBy, pushBy * -1]);
-};
-
 var processInputs = function() {
 
     console.log("processing these inputs");
 
+    //record if the Ts&Cs are ticked
     var t_c_checked = $("input[type='checkbox']").is(':checked');
 
+    //replace line breaks with a ~| (because it'll basically never come up in prose)
     var tidyMessage = $("#messageBox").val().replace(/(\r\n|\n|\r)/gm, "~|");
     var tidyAddress = $("#addressBox").val().replace(/(\r\n|\n|\r)/gm, "~|");
 
+    //slice up the message and address into 200 character chunks
     var messageChunks1 = tidyMessage.slice(0  , 200);
     var messageChunks2 = tidyMessage.slice(200, 400);
     var messageChunks3 = tidyMessage.slice(400, 600);
@@ -28,6 +22,7 @@ var processInputs = function() {
     var addressWritten = true;
     var tancTicked     = true;
 
+    //put the 200 char chunks into the secret boxes
     $("#m1").val(messageChunks1);
     $("#m2").val(messageChunks2);
     $("#m3").val(messageChunks3);
@@ -36,38 +31,32 @@ var processInputs = function() {
     $("#a1").val(addressChunks1);
     $("#a2").val(addressChunks2 + "agreed:" + t_c_checked);
 
-    if (tidyMessage.length != 0 &&
-        tidyAddress.length != 0 &&
-        t_c_checked) {
-        // If there is an address and a message then
-        // display the waiting box, and send data to paypal
-        $(".paypal-wait-words").html("Hold on a tick, PayPal will take it from here.");
-        $(".paypal-wait-box").addClass("visible");
+    if (tidyMessage.length != 0 && // If there is an address
+        tidyAddress.length != 0 && // and a message then
+        t_c_checked) {             // and the box is ticked
+                                   // then send data to paypal
         ga('send', 'event', 'success', 'click', 'all filled in!');
         return true;
     } else {
         // if somethign is wrong then go through these options
         if (tidyMessage.length === 0) {
-            $("#messageBox").addClass("textarea-error");
-            $(".card-error-message").html("You haven't written anything!");
-            $(".card-error-message").addClass("visible");
+            console.log("You haven't written anything!");
             messageWritten = false;
         }
         if (tidyAddress.length === 0) {
-            $("#addressBox").addClass("textarea-error");
-            $(".envelope-error-message").html("Where should we send it?");
-            $(".envelope-error-message").addClass("visible");
+            console.log("Where should we send it?");
             addressWritten = false;
         }
         if (t_c_checked === false) {
-            $(".t-and-c-error").html("If you don't tick to say that you agree then we can't write your letter!");
-            $(".t-and-c-error").addClass("visible");
+            console.log("If you don't tick to say that you agree then we can't write your letter!");
             tancTicked = false;
         }
+        //then send an error report to GA
         ga('send', 'event', 'error', 'click',
             "messageWritten:"+messageWritten+"addressWritten:"+addressWritten+"tancTicked:"+tancTicked );
         return false;
     }
+    return false;
 };
 
 var submit_email = function() {
@@ -105,177 +94,19 @@ var submit_email = function() {
     return false;
 };
 
-var clearErrorMessages = function() {
-    $("#messageBox").removeClass("textarea-error");
-    $("#addressBox").removeClass("textarea-error");
-    $(".card-error-message").removeClass("visible");
-    $(".envelope-error-message").removeClass("visible");
-    $(".t-and-c-error").removeClass("visible");
-};
-
-function get_browser() {
-    var ua = navigator.userAgent,
-        tem, M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-    if (/trident/i.test(M[1])) {
-        tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
-        return 'IE ' + (tem[1] || '');
-    }
-    if (M[1] === 'Chrome') {
-        tem = ua.match(/\bOPR\/(\d+)/)
-        if (tem != null) {
-            return 'Opera ' + tem[1];
-        }
-    }
-    M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
-    if ((tem = ua.match(/version\/(\d+)/i)) != null) {
-        M.splice(1, 1, tem[1]);
-    }
-    return M[0];
-}
-
-function get_browser_version() {
-    var ua = navigator.userAgent,
-        tem, M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-    if (/trident/i.test(M[1])) {
-        tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
-        return 'IE ' + (tem[1] || '');
-    }
-    if (M[1] === 'Chrome') {
-        tem = ua.match(/\bOPR\/(\d+)/)
-        if (tem != null) {
-            return 'Opera ' + tem[1];
-        }
-    }
-    M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
-    if ((tem = ua.match(/version\/(\d+)/i)) != null) {
-        M.splice(1, 1, tem[1]);
-    }
-    return M[1];
-}
-
-var giveMessageFocus = function() {
-    console.log("giving focus to message");
-    setTimeout(function() {
-        $("#messageBox").focus();
-    }, 0);
-};
-
-var doThisOnKeyup = function(event) {
-    var selector  = event.data.selector;
-    var magicWord = event.data.magicWord;
-    var warnChars = event.data.warnChars;
-    var maxChars  = event.data.maxChars;
-
-    clearErrorMessages(); //this feels a bit ineficient
-
-    var count = $(selector).val().length;
-
-    var propertyName = "haswrittenSome_" + magicWord;
-    if (document.postedNotesOneOffEventFlags[propertyName] == false && count > 0) {
-        //the count is there to stop the keyup from a tab being the thing that triggers this event.
-        ga('send', 'event', 'write', 'start', magicWord);
-        console.log(propertyName);
-        document.postedNotesOneOffEventFlags[propertyName] = true;
-    }
-
-    var numberAreaSelector  = "#char-count-number-"+ magicWord;
-    var messageAreaSelector = "#char-count-" + magicWord
-    if (count < warnChars) {
-        $(numberAreaSelector ).html("<span class='text-success'>" + count + "</span>");
-        $(messageAreaSelector).html("<span class='glyphicon glyphicon-thumbs-up'></span>");
-    } else if (count <= maxChars) {
-        $(numberAreaSelector ).html("<span class='text-warning'>" + count + "</span>");
-        $(messageAreaSelector).html("<span class='text-warning'>Time to start winding it up</span>");
-    } else if (count > maxChars) {
-        $(numberAreaSelector ).html("<span class='text-danger'>" + count + "</span>");
-        $(messageAreaSelector).html("<span class='text-danger'>Too many characters, you need to trim a little.</span>");
-    } else {
-        console.log(["the bogey man commeth", count, target]);
-    }
-
-};
-
-
-
-$(window).resize(function() {
-    fixBorder();
-    // console.log("resize");
-});
-
+console.log("hold on, I'm getting organised");
 $(document).ready(function() {
+    console.log("OK, I'm ready now");
     //declare things for analytics
     document.postedNotesOneOffEventFlags = new Object();
     document.postedNotesOneOffEventFlags.hasScrolled = false;
     document.postedNotesOneOffEventFlags.haswrittenSome_message = false;
     document.postedNotesOneOffEventFlags.haswrittenSome_address = false;
 
-    //fix the border of the blue section - this makes me sad
-    fixBorder();
-
-    //register events
-    $('#messageBox').keyup({selector: '#messageBox', magicWord: 'message', warnChars: 500, maxChars: 800}, doThisOnKeyup );
-    $('#addressBox').keyup({selector: '#addressBox', magicWord: 'address', warnChars: 250, maxChars: 400}, doThisOnKeyup );
-
-    $("input[type='checkbox']").click(clearErrorMessages);
-
-    $("#realButton").click(processInputs);
-
-
-    $(".example-letter").click(function(){$(".example-letter-box").toggleClass("letter-box-open");});
-    // $('.example-letter').attr('src', 'img/example-letter.jpg');
-
-    var toggleProTips = function() {
-        $(".pro-tips").toggleClass("pro-tips-active");
-        ga('send', 'event', 'thing', 'click', 'pro tips');
-    }
-
-    $(".pro-tips").click(toggleProTips);
-    $(".pro-tips").keypress(function(e) {
-        if(e.which == 13) {  toggleProTips(); }
-        ga('send', 'event', 'thing', 'click', 'pro tips KB');
-    });
-
-    var browser = get_browser();
-    var browser_version = parseInt(get_browser_version(), 10);
-    console.log(["we're reading your browser as:", browser, browser_version]);
-    if (browser === "Chrome" && browser_version >= 37) {
-        console.log("You've got pretty placeholder text");
-        $(".card textarea").attr("placeholder", letter);
-        $(".envelope textarea").attr("placeholder", address);
-        ga('send', 'event', 'thing', 'start', 'pretty placeholder served');
-    } else {
-        console.log("Sorry, you don't have pretty placeholder text");
-    }
-
-    // scroll to the writing box
-    $('.btn-ghost').click(function() {
-        ga('send', 'event', 'thing', 'click', 'jumped straight to writing');
-
-        var offset = $("#note").offset().top;
-        console.log("offset: " + offset);
-        $(document.body).stop().animate({
-                'scrollTop': offset
-            },
-            600,
-            "swing",
-            giveMessageFocus
-        );
-        return false;
-    });
-
-    $("body").scroll(function() {
-        //captures if the user scrolls first or clicks the 'start writing now' button first
-        //as that button triggers a scroll there will be a pair of events click, then scroll.
-        //is they scroll first it'll be scroll, do other things.
-        if(document.postedNotesOneOffEventFlags.hasScrolled==false){
-            console.log("did a scrolly");
-            ga('send', 'event', 'scrolled');
-            document.postedNotesOneOffEventFlags.hasScrolled = true;
-        }
-    });
+    console.log($("#realButton").click(processInputs));
 
     $(window).bind("beforeunload", function() {
-        //I have no idea if this is working!
+        //this sends a ga event when the window is closed.
         ga('send', 'event', 'close', JSON.stringify(document.postedNotesOneOffEventFlags));
     });
 
