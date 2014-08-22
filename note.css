@@ -1,7 +1,8 @@
 @charset "UTF-8";
 @-ms-viewport {
   /*this supposedly fixes it for win mob 8*/
-  width: device-width; }
+  width: device-width;
+}
 .needs-a-rewrite {
   /*this is applied to paragraphs
   that need to be rewritten*/

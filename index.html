@@ -1,337 +1,177 @@
-<!DOCTYPE HTML>
-<html itemscope itemtype="http://schema.org/Product" lang="en">
-
-<head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Posted Notes
-    </title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <link href="fonts/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap-3.1.1.min.css"                       rel="stylesheet">
+    <link href="css/lollies.min.css"                               rel="stylesheet">
+    <link href="css/custom.css"                                    rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv-3.7.0.js"></script>
+      <script src="js/respond-1.4.2.js"></script>
+    <![endif]-->
+  </head>
+  <body>
 
-    <!-- JQuery -->
-    <!-- not async to make sure it loads before all the other things that depend on it -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <script async defer src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <!-- Font -->
-    <link async defer href='http://fonts.googleapis.com/css?family=Roboto+Slab:300,400' rel='stylesheet' type='text/css'>
-    <!-- Posted notes specific -->
-    <script async defer src="js/header.js"></script>
-    <link async defer  type="text/css" rel="stylesheet" href="note.css">
+                <header id="main-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-6 split-nav-left vert-nav">
 
-    <!-- FB snippet stuff -->
-    <meta property="og:title" content="PostedNot.es" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="http://postednot.es/img/write-a-note.png" />
-    <meta property="og:url" content="http://postednot.es" />
-    <meta property="og:description" content="A handwritten letter is a beautiful thing, which we don't see much anymore. PostedNot.es lets you type a message and we'll write it out and post it for you." />
+            <div class="navbar navbar-default" role="navigation">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle left" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
 
-    <!-- Google+ snippets -->
-    <meta itemprop="name" content="PostedNot.es">
-    <meta itemprop="description" content="A handwritten letter is a beautiful thing, which we don&#39;t see much anymore. PostedNot.es lets you type a message and we&#39;ll write it out and post it for you.">
-    <meta itemprop="image" content="http://postednot.es/img/write-a-note.png">
-
-    <meta name="google-site-verification" content="bYpQZQy2z7eaXk9vCerlL68pUMypqSco-A_Gm9UnP9o" />
-</head>
-
-<body>
-    <header class="jumbotron header-page">
-        <!--cover page-->
-        <div class="container">
-            <!-- <ul class="nav-menu">
-                <li><a href="#how">   How     </a></li>
-                <li><a href="#where"> Where </a></li>
-            </ul> -->
-
-            <svg class="logo-bird" version="1.1" viewBox="0 0 163 180">
-                <g id="pigeon">
-                    <path d="M162.96,22.04c0,0,0.88-2.65-5.53-7.28c0,0-3.82-4.63-5.23-5.29c-1.41-0.66-1.18-4.63-5.39-6.17 c-4.2-1.54-17.91-10.36-25.2,9.37c0,0-2.65,7.61-3.54,13.78s-1.99,15.43-6.85,18.08c-4.86,2.65-10.39,9.26-13.04,12.57 c-2.65,3.31-41.12,45.86-44.88,49.61c-3.76,3.75-8.62,8.38-12.6,11.25c-3.98,2.87-23.02,16.76-25.77,19.18s-6.51,8.6-6.51,11.02 c0,0-17.02,13.67-2.65,7.28s9.73-2.65,19.46-5.95s12.82-3.53,12.82-3.53S17.9,175.5,14.93,178.37s4.54,1.76,8.97-1.76l22.33-22.27 c0,0,10.83-8.38,12.82-10.14c1.99-1.76,11.28-6.39,13.04-8.82c0,0,12.82-2.65,17.02-6.61c0,0-0.88,5.73,5.09,9.7 c5.97,3.97,10.17,8.82,10.17,8.82s-11.52,0-12.06,3.97c0,0,1.45-0.22,2.33-0.22c0,0,1.11,1.98,4.86,0.88s13.71-0.66,16.36,0 c2.65,0.66,11.5-0.22,12.6-0.44c1.11-0.22,3.98,0.22,3.98,0.22l-1.33-2.2c0,0,2.43-0.88,1.77-1.76c-0.66-0.88-0.44-2.2-4.64-1.54 c-4.2,0.66-10.17,1.54-13.49,0.44s-10.39-7.94-10.39-7.94s-4.42-4.85-0.88-9.04c3.54-4.19,15.7-19.4,17.69-22.27 c0,0,14.81-8.6,18.13-18.96c0,0,3.76-3.97,3.98-6.84c0,0,13.27-11.69,5.97-35.28c0,0-5.31-12.57-3.1-18.08 C148.37,22.7,150.58,19.39,162.96,22.04z" />
-                </g>
-            </svg>
-
-            <div class="caption
-                        col-xs-12 col-sm-6 col-sm-offset-3 text-center">
-                <h1>Posted Notes</h1>
-                <p>Beautiful handwritten letters.
-                <br>No stamps, no post office.</p>
+              <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav nav-justified">
+                  <li class="active"><a href="#">Nav Item 1</a></li>
+                  <li><a href="#">Nav Item 2</a></li>
+                  <li><a href="#">Nav Item 3</a></li>
+                </ul>
+              </div>
             </div>
-            <div class='bb'>
-                <a  href="#note" class="btn btn-default btn-lg btn-ghost
-                                        col-xs-12
-                                        col-sm-6 col-sm-offset-3
-                                        col-md-4 col-md-offset-4">
-                    <span class="glyphicon glyphicon-chevron-down"></span>
-                    <span class="button-text">Start writing now!</span>
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </a>
+
+          </div>
+          <div class="col-md-4 split-nav-logo">
+            <!-- LOGO -->
+            <div id="logo" class="split-nav-logo-desktop"><a href="/"><img src="http://placehold.it/720x440/149cd7/149cd7" /></a></div>
+          </div>
+          <div class="col-md-4 col-sm-6 split-nav-right vert-nav">
+
+            <div class="navbar navbar-default" role="navigation">
+              <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav nav-justified">
+                  <li><a href="#">Nav Item 4</a></li>
+                  <li><a href="#">Nav Item 5</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Item 6 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li class="dropdown-header">Nav header</li>
+                      <li><a href="#">Separated link</a></li>
+                      <li><a href="#">One more separated link</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
             </div>
+
+          </div>
         </div>
-    </header><!--end jumbotron-->
-
-    <div class="container">
-        <div class="row what-row">
-            <!--process stuff-->
-            <h2>What we do&hellip;</h2>
-            <div class="what-row-text">
-                <p>A handwritten letter is a beautiful thing, which we don't see much anymore.
-                Maybe you don't have a stamp or forget to go to the post office - something always gets in the way of mailing that letter.</p>
-                <p>If this sounds like you then Posted Notes is here to help.</p>
-                <p>We take your text and turn it into a beautiful, handwritten note. We put a stamp on it and post it.</p>
-                <p>There is no sign up and each letter costs $5 including delivery. We've kept it really simple so all you need to think about are the words.</p>
-                <p>We will write every letter by hand on A5 paper and put it into a matching envelope. We'll write the address on the front and pop on a stamp. We will post the letter in the recipient's country.</p>
-            </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="split-nav-logo-mobile"></div>
+          </div>
         </div>
-
-        <div class="row how-row">
-            <h2>How&hellip;</h2>
-            <div class="col-xs-12 col-sm-4">
-                <div class="row">
-                    <div class="col-xs-3 col-sm-12 baller">
-                        <div class='numbered-illustration'>
-                            <img src="img/write-a-note.png" class="ball-icon"
-                            alt="An illustration of the posted notes screen being filled in.">
-                            <div class="number hidden-xs">1</div>
-                        </div>
-                    </div>
-                    <div class="col-xs-9 col-sm-12">
-                        <p class="text-left">You type a letter. You have 800 characters to play with.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-4">
-                <div class="row">
-                    <div class="col-xs-3 col-sm-12 baller">
-                        <div class='numbered-illustration'>
-                            <img src="img/pencil.png" class="ball-icon"
-                            alt="An illustration of a pencil (although a pen would make more sense!)">
-                            <div class="number hidden-xs">2</div>
-                        </div>
-                    </div>
-                    <div class="col-xs-9 col-sm-12">
-                        <p class="text-left">We take your words and put pen to paper and letter to letter box.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-4">
-                <div class="row">
-                    <div class="col-xs-3 col-sm-12 baller">
-                        <div class='numbered-illustration'>
-                            <img src="img/letter.png" class="ball-icon"
-                            alt="An illustration of a letter coming out of an envelope.">
-                            <div class="number hidden-xs">3</div>
-                        </div>
-                    </div>
-                    <div class="col-xs-9 col-sm-12">
-                        <p class="text-left">A few days later someone gets to open a beautiful handwritten note.</p>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </header>    <div class="content-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Lorem ipsum dolor sit amet</h1>
+          </div>
         </div>
-
-        <div class="row where-row">
-            <!-- <a name="where"></a> -->
-            <!--geography stuff-->
-            <h2>Where&hellip;</h2>
-            <div class="col-xs-12 col-sm-7 col-sm-offset-1">
-                    <object type="image/svg+xml" data="img/Blank_Map_Pacific_World.svg" >world map</object>
-            </div>
-            <div class="col-xs-12 col-sm-4 where-text">
-                <p>At the moment we post letters to Australia and the UK. 
-                We'll be adding more places soon so if you want to know when we're able to send letters to your country then send us an email.</p>
-            </div>
+        <div class="row">
+          <div class="col-md-4">
+            <img class="animatedEntrance" src="http://placehold.it/720x850/21b2eb/058dcd" />
+          </div>
+          <div class="col-md-8">
+            <h2>Praesent nisl diam</h2>
+            <p>Proin eu leo non metus vulputate viverra. Curabitur ac augue ante. Praesent nisl diam, iaculis eget ipsum at, blandit laoreet eros. Nam hendrerit, erat commodo varius consequat, dolor massa tempor massa, vel cursus enim neque pellentesque augue. Aenean ullamcorper et lacus at hendrerit. Phasellus id lectus luctus, congue quam id, tempor justo. Mauris sodales imperdiet nisi eget lacinia. Nulla vehicula eleifend nibh sed malesuada. Praesent eget tortor erat. Nullam a sapien sit amet enim tempor cursus. Sed vehicula nisl sed odio gravida aliquam. Sed metus lorem, vestibulum vel pulvinar vel, condimentum vitae risus. Curabitur in odio ut nisl convallis dapibus sollicitudin vitae orci. Aenean vel molestie massa. Nam vehicula porta arcu, at dapibus nulla pulvinar fermentum. Nam orci enim, elementum ac risus vestibulum, imperdiet placerat mi.</p>
+            <h2>Praesent nisl diam</h2>
+            <p>Quisque ut tellus velit. Proin non massa velit. Aliquam erat volutpat. In ac lectus porttitor, ornare leo nec, feugiat mi. Aliquam luctus tristique est, nec egestas turpis vehicula et. Mauris tincidunt euismod tortor sit amet molestie. Sed auctor mollis elit, eget sollicitudin purus iaculis vel. Etiam tempor augue vel justo dignissim, at vulputate augue consequat. Integer consequat tempor odio eget sagittis. Donec quis nisi tortor. Mauris accumsan, urna placerat faucibus rhoncus, neque risus luctus libero, eget fringilla elit ligula non urna. Quisque id ante at sapien auctor feugiat. Donec eget blandit tortor, eu luctus nisl. Suspendisse hendrerit lectus congue, volutpat massa ut, tincidunt est. Ut vel tortor ante. In a mi vitae sapien eleifend placerat eget ac est.</p>
+          </div>
         </div>
-
-        <div class="row example-row">
-            <!-- <a name="where"></a> -->
-            <!--geography stuff-->
-            <h2>What will my note look like?</h2>
-            <div class="col-xs-12 col-sm-8 example-letter-box">
-                <img class="example-letter" src="img/example-letter.jpg" alt="an example of a hand written letter: 1st August 2014
-Sydney
-Dear reader,
-Many of you have asked to see an example of what a letter looks like. I thought that this was an excellent idea but I didn't really know how to show you an example without breaking trust and showing someone's letter. 
->Then it occurred to me that I could write a letter directly to you!<
-This is a letter, hand written in Sydney, ready to go anywhere in Australia!
-I must get on if I am to make this afternoon's post but if you have any questions then just email me at ben@postednot.es and I'll do what I can.
-
-Your humble servant
-
-Ben" style="width: 70%;"/>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-                <p>This is an example of a letter sent in Australia. Scribes in different countries have different writing styles, but you get the picture!</p>
-            </div>
-        </div>
-
-        <div class="row note-row" id="nr"> <!--writing stuff-->
-
-            <div class="pro-tips hidden-xs hidden-sm">
-                <h3 tabindex=0>pro tips <span class="glyphicon glyphicon-question-sign"></span></h3>
-                <p>If you begin a line with a <code>&gt;</code> we'll right align it. This is handy for formatting addresses.</p>
-                <p>If you put a line of text in between angle brackets:<br><code>&gt; your text here &lt;</code><br>then we'll indent it both sides, and if possible, centre it.</p>
-                <p>If you run your text through the <a tabindex="-1" href="http://www.hemingwayapp.com/">Hemmingway App</a> it almost always comes out better for it!</p>
-            </div>
-
-            <h2 id="note">Your note&hellip;</h2>
-            <!--letter comes from here: http://www.lettersofnote.com/2010/11/its-true-beauty-however-was-that-it.html-->
-            <form action="https://www.paypal.com/cgi-bin/webscr"
-                  method="post"
-                  target="_top"
-                  onsubmit="return processInputs();">
-
-                <div class="row">
-                    <div class="card-holder
-                                col-sm-12
-                                col-md-5
-                                col-md-offset-1">
-                        <label for="messageBox">Message: </label> <span class="char-count" id="char-count-number-message">0</span>/800 <span id="char-count-message"></span>
-                        <div class="card">
-                            <textarea name="messageBox" id="messageBox"
-                                      rows="5" cols="60" maxlength="850"
-                                      placeholder="Write your letter here..."></textarea>
-                            <div class="card-error-message"></div>
-                        </div>
-                    </div>
-
-                    <div class="envelope-holder
-                                col-sm-12
-                                col-md-5">
-                        <label for="addressBox">Address: </label><span class="char-count" id="char-count-number-address">0</span>/400 <span id="char-count-address"></span>
-                        <div class="envelope">
-                            <div class="stamp pull-right">
-                                <svg class="logo-bird" version="1.1" viewBox="0 0 163 180">
-                                    <g class="pigeon">
-                                        <path d="M162.96,22.04c0,0,0.88-2.65-5.53-7.28c0,0-3.82-4.63-5.23-5.29c-1.41-0.66-1.18-4.63-5.39-6.17 c-4.2-1.54-17.91-10.36-25.2,9.37c0,0-2.65,7.61-3.54,13.78s-1.99,15.43-6.85,18.08c-4.86,2.65-10.39,9.26-13.04,12.57 c-2.65,3.31-41.12,45.86-44.88,49.61c-3.76,3.75-8.62,8.38-12.6,11.25c-3.98,2.87-23.02,16.76-25.77,19.18s-6.51,8.6-6.51,11.02 c0,0-17.02,13.67-2.65,7.28s9.73-2.65,19.46-5.95s12.82-3.53,12.82-3.53S17.9,175.5,14.93,178.37s4.54,1.76,8.97-1.76l22.33-22.27 c0,0,10.83-8.38,12.82-10.14c1.99-1.76,11.28-6.39,13.04-8.82c0,0,12.82-2.65,17.02-6.61c0,0-0.88,5.73,5.09,9.7 c5.97,3.97,10.17,8.82,10.17,8.82s-11.52,0-12.06,3.97c0,0,1.45-0.22,2.33-0.22c0,0,1.11,1.98,4.86,0.88s13.71-0.66,16.36,0 c2.65,0.66,11.5-0.22,12.6-0.44c1.11-0.22,3.98,0.22,3.98,0.22l-1.33-2.2c0,0,2.43-0.88,1.77-1.76c-0.66-0.88-0.44-2.2-4.64-1.54 c-4.2,0.66-10.17,1.54-13.49,0.44s-10.39-7.94-10.39-7.94s-4.42-4.85-0.88-9.04c3.54-4.19,15.7-19.4,17.69-22.27 c0,0,14.81-8.6,18.13-18.96c0,0,3.76-3.97,3.98-6.84c0,0,13.27-11.69,5.97-35.28c0,0-5.31-12.57-3.1-18.08 C148.37,22.7,150.58,19.39,162.96,22.04z" />
-                                    </g>
-                                </svg>
-                            </div>
-                            <textarea name="addressBox" id="addressBox" 
-                                      rows="5" cols="60" maxlength="450"
-                                      placeholder="Write the address here..." ></textarea>
-                            <div class="envelope-error-message"></div>
-                        </div>
-                    </div>
+      </div>
+    </div>    <div class="form-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <img src="http://placehold.it/720x850/21b2eb/058dcd" />
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <form method="post" id="custom_form" name="custom_form">
+              <div class="form-group">
+                <label >Name</label>
+                <input  type="text" id="name" name="name" class="form-control">
+              </div>
+              <div class="form-group">
+                <label >Email</label>
+                <input type="text" id="email" name="email" class="form-control" >
                 </div>
-
-                <div class="invisible-bit dont-read" aria-hidden="true">
-                    <p>This section is supposed to be hidden. If you are getting this then your styling is broken or something is wrong with your screen reader (or my coding). Ignore the next 6 fields.</p>
-                    <input type="hidden" name="cmd" value="_s-xclick">
-                    <input type="hidden" name="hosted_button_id" value="BAMLF4YGYUAJ6">
-
-                    <!--allocated to message - 800 chars-->
-                    <input type="hidden" name="on0" value="message_part_1">
-                    <input type="text" name="os0" id="m1" maxlength="200">
-
-                    <input type="hidden" name="on1" value="message_part_2">
-                    <input type="text" name="os1" id="m2" maxlength="200">
-
-                    <input type="hidden" name="on3" value="message_part_3">
-                    <input type="text" name="os3" id="m3" maxlength="200">
-
-                    <input type="hidden" name="on4" value="message_part_4">
-                    <input type="text" name="os4" id="m4" maxlength="200">
-
-                    <!--allocated to address 400 chars-->
-                    <input type="hidden" name="on5" value="address_part_1">
-                    <input type="text" name="os5" id="a1" maxlength="200">
-
-                    <input type="hidden" name="on6" value="address_part_2">
-                    <input type="text" name="os6" id="a2" maxlength="200">
+                <div class="form-group">
+                <label >Message</label>
+                <textarea type="text" id="message" name="message" class="form-control"></textarea>
+              </div>
+                <div class="form-group">
+                <label>Captcha (case sensitive)</label>
+                <div id="spambox">
+                  <div class="spam"></div>
                 </div>
-                <div class="t-and-c">
-                    <label for="agree_t_and_c">Ts &amp; Cs
-                    <input type="checkbox" name="agree_t_and_c" id="agree_t_and_c"></label>
-                    <span class="tc-text">Tick to say that you <a href="#rules">agree to 'the rules' below</a>.</span>
-                    <span class='t-and-c-error'></span>
-                </div>
-                <div class="button-bar">
-                <!-- ripped from button for validator reasons -->
-                <!-- src="https://www.paypalobjects.com/en_AU/i/btn/btn_paynow_SM.gif"
-                     border="0"
-                     type="image"
-                     alt="PayPal — The safer, easier way to pay online."-->
-                    <button
-                            class="btn btn-primary btn-lg col-xs-12 col-md-3 col-md-offset-3"
-                            name="submit"
-                            id="realButton">
-                        <span class="send-btn-text">Send and pay</span>
-                        <svg class="paypal-logo" viewBox="0 0 16 17" version="1.1">
-                            <path d="m15.603 3.917c-0.264-0.505-0.651-0.917-1.155-1.231-0.025-0.016-0.055-0.029-0.081-0.044 0.004 0.007 0.009 0.014 0.013 0.021 0.265 0.506 0.396 1.135 0.396 1.891 0 1.715-0.712 3.097-2.138 4.148-1.425 1.052-3.418 1.574-5.979 1.574h-0.597c-0.45 0-0.9 0.359-1.001 0.798l-0.719 3.106c-0.101 0.438-0.552 0.797-1.002 0.797h-1.404l-0.105 0.457c-0.101 0.438 0.184 0.798 0.633 0.798h2.1c0.45 0 0.9-0.359 1.001-0.798l0.718-3.106c0.101-0.438 0.551-0.797 1.002-0.797h0.597c2.562 0 4.554-0.522 5.979-1.574 1.426-1.052 2.139-2.434 2.139-4.149 0-0.755-0.132-1.385-0.397-1.891z" fill="#0079c1" class="PPTM-btm"></path>
-                            <path d="m9.27 6.283c-0.63 0.46-1.511 0.691-2.641 0.691h-0.521c-0.45 0-0.736-0.359-0.635-0.797l0.628-2.72c0.101-0.438 0.552-0.797 1.002-0.797h0.686c0.802 0 1.408 0.136 1.814 0.409 0.409 0.268 0.611 0.683 0.611 1.244 0 0.852-0.315 1.507-0.944 1.97zm3.369-5.42c-0.913-0.566-2.16-0.863-4.288-0.863h-4.372c-0.449 0-0.9 0.359-1.001 0.797l-2.957 12.813c-0.101 0.439 0.185 0.798 0.634 0.798h2.099c0.45 0 0.901-0.358 1.003-0.797l0.717-3.105c0.101-0.438 0.552-0.797 1.001-0.797h0.598c2.562 0 4.554-0.524 5.979-1.575 1.427-1.051 2.139-2.433 2.139-4.148-0.001-1.365-0.439-2.425-1.552-3.123z" fill="#00457c" class="PPTM-top"></path>
-                        </svg>
-                    </button>
-                    <div class="paypal-wait-box alert
-                                alert-success col-xs-12 col-md-4 col-md-offset-1">
-                        <span class="glyphicon glyphicon-cog paypal-wait-icon"></span>
-                        <span class="paypal-wait-words">Hold on a tick, PayPal will take it from here.</span>
-                    </div>
-                </div>
+              </div>
+                <button type="submit" class="btn btn-default" id="submit">Submit</button>
             </form>
+          </div>
         </div>
-
-        <div class="row footer-row">
-            <!--footer stuff-->
-            <div class="airmail-stripe"></div>
-            <div class="col-xs-12 col-sm-4">
-                <h3>Contact us</h3>
-                <p>We'd love to hear from you, let us know what you think. Leave your email address and we'll send you exciting things as we think them up (mostly about letters).</p>
-                <form class="email-form" id="form1" role="form" onsubmit="return submit_email();">
-                  <div class="name">
-                    <input name="name" type="text" class="form-control" placeholder="Name" id="name" />
-                  </div>
-
-                  <div class="email">
-                    <input name="email" type="email" class="form-control" id="email" placeholder="Email" />
-                  </div>
-
-                  <div class="submit">
-                    <input type="submit" value="SEND" id="email-button" class="btn btn-default btn-xs btn-block"/>
-                  </div>
-                  <div class="message"></div>
-                </form>
-
-                <div class="us"></div>
-                <p class="text-center">"Us" is <a href="https://twitter.com/irina_belova">Irina Belova</a> &amp; <a href="https://plus.google.com/+BenDoherty?rel=author">Ben Doherty</a></p>
-                <p><a href="https://www.facebook.com/handpostednotes" class="pull-left"><img src="img/facebook.png" alt="facebook icon" title="We've got a facebook page too!"></a> We've got a facebook page too. That's where you can see more up to date comings and goings.</p>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-                <h3><a id="rules"></a>The Rules</h3>
-                <p>We'd love to spend all day writing thank you cards for grandmas, love letters, anonymous high five letters and other feel good things. We don't mind if you get us to write letters to your landlord or pleas for the library to let you off your fines. We'll even politely fire all your staff or tell someone how terribly rude they are. We won't send death threats or Ransom notes.</p>
-                <p>When you tick the box above you are agreeing to the following:</p>
-                <p>I grant Posted Notes permission to transcribe this content  and post it to the specified recipient on my behalf. I have proof-read the message and understand that it will be transcribed as is. I agree that the content is not deceptive, illegal, malicious nor harmful. In the event that the communication is deemed unsolicited by anyone involved in this transaction, Posted Notes will not be held liable for any damages, legal or otherwise, resulting from this letter. I understand that Posted Notes reserves the right to reject my order for any reason. I understand that there will be no tracking information for my letter.</p>
-            </div>
-
-            <div class="p-and-t
-                        col-xs-12 col-sm-4">
-                <h3>Privacy</h3>
-                <p>We promise we won't read your letters <a href="http://youtu.be/O1eOsMc2Fgg">out loud</a> or let anyone else do that either. They go directly to one of our scribes and then once they are in the letterbox nobody will see them again. The only place your data gets stored is with paypal, and their security makes most banks look lax!</p>
-                <h3>Thanks</h3>
-                <p>This site relies on lots of things that other people have given away for free. The letter from Neil Armstrong is from <a href="http://www.lettersofnote.com/2010/11/its-true-beauty-however-was-that-it.html" title="Its true beauty, however, was that it worked.">Letters of note</a>. The contact email form is powered by the <a href="https://mandrillapp.com/">Mandril API</a>. <a href="http://etc.usf.edu/clipart/6000/6035/writing_1.htm">The man at the desk</a> is from <a href="">the Educational Technology Clearinghouse</a>. The circle images (ballicons!) are from <a href="http://pixelbuddha.net/ballicons2/">Pixel Buddha.</a></p>
-                <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0; float: left;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Posted Notes</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Ben Doherty &amp; Irina Belova</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
-            </div>
+      </div>
+    </div>    <div class="footer-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <h2>Praesent nisl diam</h2>
+            <p>Proin eu leo non metus vulputate viverra. Curabitur ac augue ante. Praesent nisl diam, iaculis eget ipsum at, blandit laoreet eros. Nam hendrerit, erat commodo varius consequat, dolor massa tempor massa, vel cursus enim neque pellentesque augue. Aenean ullamcorper et lacus at hendrerit. Phasellus id lectus luctus, congue quam id, tempor justo</p>
+          </div>
+          <div class="col-md-3">
+            <h2>Praesent nisl diam</h2>
+            <p>Proin eu leo non metus vulputate viverra. Curabitur ac augue ante. Praesent nisl diam, iaculis eget ipsum at, blandit laoreet eros. Nam hendrerit, erat commodo varius consequat, dolor massa tempor massa, vel cursus enim neque pellentesque augue. Aenean ullamcorper et lacus at hendrerit. Phasellus id lectus luctus, congue quam id, tempor justo.</p>
+          </div>
+          <div class="col-md-6">
+            <div id="footer-map"></div>
+          </div>
         </div>
-
+      </div>
     </div>
-    <!--end container-->
+    <div class="copyright-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12 left">
+            &copy; 2014 Praesent nisl diam.
+          </div>
+          <div class="col-md-6 col-sm-6 right hidephone">
+            Proin | Metus | Vulputate | Curabitur
+          </div>
+        </div>
+      </div>
+    </div>    <div id="map"></div>    <div id="map"></div>    <div id="map"></div>
 
-
-    <script async src="js/letter.js"></script>
-    <script async src="js/useful.js"></script>
-    <!-- <script async src="bootstrap-helper.js"></script> -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-52654925-1', 'auto');
-      ga('send', 'pageview');
-
-    </script>
-
-    </body>
+                <!-- SCRIPTS -->
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/bootstrap-3.1.1.min.js"></script>
+    <script src="plugins/backstretch/backstretch-2.0.4.min.js"></script>
+    <script src="plugins/camera-slider/camera-slider-1.3.4.min.js"></script>
+    <script src="plugins/camera-slider/easing-1.3.min.js"></script>
+    <script src="plugins/fancybox/fancybox-1.3.4.pack.js"></script>
+    <script src="plugins/fancybox/klass-1.0.min.js"></script>
+    <script src="plugins/fancybox/photoswipe-3.0.5.min.js"></script>
+    <script src="plugins/hover-animations/transform2d.min.js"></script>
+    <script src="plugins/hover-animations/hover-animations-1.0.min.js"></script>
+    <script src="plugins/match-height/match-height-0.5.1.min.js"></script>
+    <script src="plugins/validation/validation-2.2.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="js/lollies.min.js"></script>
+    <script src="js/custom.js"></script>
+  </body>
 </html>
