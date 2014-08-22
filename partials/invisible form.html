@@ -1,0 +1,73 @@
+    <div class="magic-form-block">
+      <div class="container">
+        <form action="https://www.paypal.com/cgi-bin/webscr"
+              method="post"
+              target="_top"
+              onsubmit="return processInputs();">
+          <div class="row">
+            <div class="col-md-12">
+                <h1>This is where the paypal magic happens</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="messageBox">Message:</label>
+              <textarea name="messageBox" id="messageBox"
+                        rows="5" cols="60" maxlength="850"
+                        placeholder="Write your letter here..."></textarea>
+
+            </div>
+            <div class="col-md-6">
+              <label for="addressBox">Address:</label>
+              <textarea name="addressBox" id="addressBox"
+                        rows="5" cols="60" maxlength="450"
+                        placeholder="Write the address here..." ></textarea>
+            </div>
+          </div>
+          <div class="invisible-bit dont-read" aria-hidden="true">
+            <p>This section is supposed to be hidden. If you are getting this then your styling is broken or something is wrong with your screen reader (or my coding). Ignore the next 6 fields.</p>
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="BAMLF4YGYUAJ6">
+
+            <!--allocated to message - 800 chars-->
+            <input type="hidden" name="on0" value="message_part_1">
+            <input type="text" name="os0" id="m1" maxlength="200">
+
+            <input type="hidden" name="on1" value="message_part_2">
+            <input type="text" name="os1" id="m2" maxlength="200">
+
+            <input type="hidden" name="on3" value="message_part_3">
+            <input type="text" name="os3" id="m3" maxlength="200">
+
+            <input type="hidden" name="on4" value="message_part_4">
+            <input type="text" name="os4" id="m4" maxlength="200">
+
+            <!--allocated to address 400 chars-->
+            <input type="hidden" name="on5" value="address_part_1">
+            <input type="text" name="os5" id="a1" maxlength="200">
+
+            <input type="hidden" name="on6" value="address_part_2">
+            <input type="text" name="os6" id="a2" maxlength="200">
+          </div>
+
+          <div class="t-and-c">
+               <label for="agree_t_and_c">Ts &amp; Cs
+               <input type="checkbox" name="agree_t_and_c" id="agree_t_and_c"></label>
+               <span class="tc-text">Tick to say that you <a href="#rules">agree to 'the rules' below</a>.</span>
+               <span class='t-and-c-error'></span>
+          </div>
+
+          <div class="button-bar">
+            <button class="btn btn-primary btn-lg col-xs-12 col-md-3 col-md-offset-3"
+                    name="submit"
+                    id="realButton">
+                 <span class="send-btn-text">Send and pay</span>
+                 <svg class="paypal-logo" viewBox="0 0 16 17" version="1.1">
+                      <path d="m15.603 3.917c-0.264-0.505-0.651-0.917-1.155-1.231-0.025-0.016-0.055-0.029-0.081-0.044 0.004 0.007 0.009 0.014 0.013 0.021 0.265 0.506 0.396 1.135 0.396 1.891 0 1.715-0.712 3.097-2.138 4.148-1.425 1.052-3.418 1.574-5.979 1.574h-0.597c-0.45 0-0.9 0.359-1.001 0.798l-0.719 3.106c-0.101 0.438-0.552 0.797-1.002 0.797h-1.404l-0.105 0.457c-0.101 0.438 0.184 0.798 0.633 0.798h2.1c0.45 0 0.9-0.359 1.001-0.798l0.718-3.106c0.101-0.438 0.551-0.797 1.002-0.797h0.597c2.562 0 4.554-0.522 5.979-1.574 1.426-1.052 2.139-2.434 2.139-4.149 0-0.755-0.132-1.385-0.397-1.891z" fill="#0079c1" class="PPTM-btm"></path>
+                      <path d="m9.27 6.283c-0.63 0.46-1.511 0.691-2.641 0.691h-0.521c-0.45 0-0.736-0.359-0.635-0.797l0.628-2.72c0.101-0.438 0.552-0.797 1.002-0.797h0.686c0.802 0 1.408 0.136 1.814 0.409 0.409 0.268 0.611 0.683 0.611 1.244 0 0.852-0.315 1.507-0.944 1.97zm3.369-5.42c-0.913-0.566-2.16-0.863-4.288-0.863h-4.372c-0.449 0-0.9 0.359-1.001 0.797l-2.957 12.813c-0.101 0.439 0.185 0.798 0.634 0.798h2.099c0.45 0 0.901-0.358 1.003-0.797l0.717-3.105c0.101-0.438 0.552-0.797 1.001-0.797h0.598c2.562 0 4.554-0.524 5.979-1.575 1.427-1.051 2.139-2.433 2.139-4.148-0.001-1.365-0.439-2.425-1.552-3.123z" fill="#00457c" class="PPTM-top"></path>
+                 </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
